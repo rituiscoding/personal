@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Mother's Day</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fff9f9;
+      overflow-x: hidden;
+      background-image: url('https://www.transparenttextures.com/patterns/flowers.png');
+      background-repeat: repeat;
+      background-size: 300px;
+    }
+
+    .modern-font {
+      font-size: 5rem;
+      font-weight: 800;
+      background: linear-gradient(45deg, #ff9aa2, #ff6f91, #ff477e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .heart {
+      position: relative;
+      width: 100px;
+      height: 90px;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    .heart:before, .heart:after {
+      position: absolute;
+      content: "";
+      left: 50px;
+      top: 0;
+      width: 50px;
+      height: 80px;
+      background: #ff6b81;
+      border-radius: 50px 50px 0 0;
+      transform: rotate(-45deg);
+      transform-origin: 0 100%;
+    }
+
+    .heart:after {
+      left: 0;
+      transform: rotate(45deg);
+      transform-origin: 100% 100%;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25%, 75% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+    }
+
+    .flower {
+      position: absolute;
+      opacity: 0.7;
+      animation: floating 4s ease-in-out infinite;
+    }
+
+    .heart-popup {
+      position: fixed;
+      pointer-events: none;
+      z-index: 100;
+      animation: float-up 4s linear forwards;
+    }
+
+    @keyframes float-up {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes floating {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, #ff6b81, #ff8e53);
+      box-shadow: 0 4px 15px rgba(255, 107, 129, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 20px rgba(255, 107, 129, 0.6);
+    }
+  </style>
+</head>
+<body class="text-gray-800">
+
+  <!-- Floating Flowers -->
+  <div class="flower text-4xl text-pink-300 top-10 left-5">🌸</div>
+  <div class="flower text-5xl text-red-300 top-20 right-10">🌹</div>
+  <div class="flower text-3xl text-purple-300 bottom-20 left-15">🌺</div>
+  <div class="flower text-6xl text-yellow-300 bottom-10 right-20">🌼</div>
+
+  <!-- Hero Section -->
+  <section class="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-pink-50 to-white opacity-70"></div>
+    <div class="container mx-auto px-6 z-10">
+      <div class="flex flex-col items-center">
+        <h1 class="modern-font text-center mb-8">
+          Happy Mother's Day
+        </h1>
+        <p class="text-3xl text-center text-pink-500 mb-16 font-semibold">
+          Celebrating the heart of every home.
+        </p>
+
+        <button onclick="toggleHearts()" class="btn-primary text-white px-10 py-4 rounded-full text-2xl font-semibold mb-16">
+          <i class="fas fa-gift mr-2"></i> Click for Surprise
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="py-10 bg-gradient-to-b from-pink-100 to-pink-200 text-center">
+    <p class="text-base text-gray-600 mb-2">© 2025 All rights reserved.</p>
+    <p class="text-xl font-semibold text-pink-700">With ❤️, by Ritashree</p>
+    <div class="mt-4 space-y-2 text-pink-600 font-medium">
+      <p>
+        <i class="fab fa-linkedin mr-2"></i>
+        <a href="https://www.linkedin.com/in/ritashree-das-connect/" target="_blank">LinkedIn</a>
+      </p>
+      <p>
+        <i class="fas fa-envelope mr-2"></i>
+        <a href="mailto:dritashreebiz@gmail.com">dritashreebiz@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    let heartsActive = false;
+    let heartInterval;
+
+    function toggleHearts() {
+      heartsActive = !heartsActive;
+
+      if (heartsActive) {
+        heartInterval = setInterval(createHeartPopup, 200);
+        for (let i = 0; i < 30; i++) {
+          setTimeout(createHeartPopup, i * 50);
+        }
+      } else {
+        clearInterval(heartInterval);
+      }
+    }
+
+    function createHeartPopup() {
+      const heart = document.createElement('div');
+      heart.className = 'heart-popup';
+      heart.innerHTML = '<i class="fas fa-heart text-pink-500 text-3xl"></i>';
+
+      const startX = Math.random() * window.innerWidth;
+      heart.style.left = `${startX}px`;
+      heart.style.bottom = '0px';
+
+      const size = Math.random() * 20 + 10;
+      heart.style.fontSize = `${size}px`;
+
+      const colors = ['#ff6b81', '#ff8e53', '#ff477e', '#ff7eb9', '#ff9aa2'];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      heart.style.color = color;
+
+      const duration = Math.random() * 3 + 2;
+      heart.style.animationDuration = `${duration}s`;
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, duration * 1000);
+    }
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('button')) {
+        for (let i = 0; i < 3; i++) {
+          createHeartPopup();
+        }
+      }
+    });
+  </script>
+</body>
+</html>
